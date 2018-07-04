@@ -1,6 +1,7 @@
 package com.example.vatsal.newsly;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,23 +9,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.facebook.login.LoginManager;
 
 public class SecondActivity extends AppCompatActivity {
-//    boolean isGoogleAccount;
+    boolean isGoogleAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent intent = getIntent();
-//        String s = intent.getExtras().getString("account").getClass().getSimpleName();
-//        if (s.equals("GoogleSignInAccount"))
-//            isGoogleAccount = true;
-//        else
-//            isGoogleAccount = false;
-
+        isGoogleAccount = intent.getExtras().getBoolean(MainActivity.isGoogleAccount);
     }
 
     @Override
@@ -38,18 +34,12 @@ public class SecondActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sign_out_menu:
-//                if (isGoogleAccount) {
-                MainActivity.mGoogleSignInClient.signOut()
-                        .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-//                } else {
-//
-//                }
+                if (isGoogleAccount)
+                    MainActivity.mGoogleSignInClient.signOut();
+                else
+                    LoginManager.getInstance().logOut();
+                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

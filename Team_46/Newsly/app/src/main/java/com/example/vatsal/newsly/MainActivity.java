@@ -13,6 +13,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -53,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            Log.d(TAG, "onCreate: already logged in");
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            intent.putExtra("account", account);
-            startActivity(intent);
-        }
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        if (account != null) {
+//            Log.d(TAG, "onCreate: already logged in");
+//            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+//            intent.putExtra("account", account);
+//            startActivity(intent);
+//        }
         signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Facebook Sign In
 
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginManager.getInstance().logOut();
+        loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
 
@@ -82,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra(isGoogleAccount, false);
-                startActivity(intent);
+                sendToSecondActivity(false);
             }
 
             @Override
@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error while logging in", Toast.LENGTH_LONG).show();
             }
         });
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            sendToSecondActivity(true);
+        }
     }
 
     @Override
@@ -105,16 +110,21 @@ public class MainActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra(isGoogleAccount, true);
-                startActivity(intent);
+                sendToSecondActivity(true);
+                return;
             } catch (ApiException e) {
                 Log.d(TAG, "onActivityResult: " + e.getStatusCode() + " " + e.getLocalizedMessage());
                 Toast.makeText(MainActivity.this, e.getLocalizedMessage() + e.getStatusCode(), Toast.LENGTH_LONG).show();
             }
 
-        } else
+        }
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            sendToSecondActivity(true);
+        }
+        else
             callbackManager.onActivityResult(requestCode, resultCode, data);
+
 
     }
 
@@ -124,5 +134,11 @@ public class MainActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void sendToSecondActivity(boolean isGoogle) {
+        Intent i = new Intent(MainActivity.this, SecondActivity.class);
+        i.putExtra(isGoogleAccount, isGoogle);
+        startActivity(i);
     }
 }

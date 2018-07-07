@@ -26,7 +26,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private static final int RC_GOOGLE_SIGN_IN = 1;
     static GoogleSignInClient mGoogleSignInClient;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 //        if (account != null) {
 //            Log.d(TAG, "onCreate: already logged in");
-//            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+//            Intent intent = new Intent(SignInActivity.this, LoggedInActivity.class);
 //            intent.putExtra("account", account);
 //            startActivity(intent);
 //        }
@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Facebook Sign In
 
-        LoginManager.getInstance().logOut();
+
+
+
         loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             } catch (ApiException e) {
                 Log.d(TAG, "onActivityResult: " + e.getStatusCode() + " " + e.getLocalizedMessage());
-                Toast.makeText(MainActivity.this, e.getLocalizedMessage() + e.getStatusCode(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInActivity.this, e.getLocalizedMessage() + e.getStatusCode(), Toast.LENGTH_LONG).show();
             }
 
         }
@@ -137,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendToSecondActivity(boolean isGoogle) {
-        Intent i = new Intent(MainActivity.this, SecondActivity.class);
+        Intent i = new Intent(SignInActivity.this, LoggedInActivity.class);
         i.putExtra(isGoogleAccount, isGoogle);
         startActivity(i);
     }

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.facebook.login.LoginManager;
 
-public class SecondActivity extends AppCompatActivity {
+public class LoggedInActivity extends AppCompatActivity {
     boolean isGoogleAccount;
 
     @Override
@@ -19,7 +19,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent intent = getIntent();
-        isGoogleAccount = intent.getExtras().getBoolean(MainActivity.isGoogleAccount);
+        isGoogleAccount = intent.getExtras().getBoolean(SignInActivity.isGoogleAccount);
     }
 
     @Override
@@ -34,10 +34,10 @@ public class SecondActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.sign_out_menu:
                 if (isGoogleAccount)
-                    MainActivity.mGoogleSignInClient.signOut();
+                    SignInActivity.mGoogleSignInClient.signOut();
                 else
                     LoginManager.getInstance().logOut();
-                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoggedInActivity.this, SignInActivity.class);
                 startActivity(intent);
                 return true;
             default:

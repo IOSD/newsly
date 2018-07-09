@@ -80,8 +80,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null) {
-            Toast.makeText(this, "Welcome Back !!!", Toast.LENGTH_SHORT).show();
             sendToMainActivity();
+            finish();
         }
     }
 

@@ -13,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String API_KEY = "";
 
+    public @BindView(R.id.progress_bar) ProgressBar progressBar;
     public GoogleSignInClient mGoogleSignInClient;
     public GoogleSignInOptions googleSignInOptions;
     public @BindView(R.id.recycler_view_main) RecyclerView recyclerView;
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         articlesList = new ArrayList<>();
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -74,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                progressBar.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+
                 switch(item.getItemId()){
                     case R.id.action_national_news:
                         getNationalNews();
@@ -106,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
                 homeScreenAdapter = new HomeScreenAdapter(MainActivity.this, articlesList);
                 recyclerView.setAdapter(homeScreenAdapter);
+
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
                 homeScreenAdapter.notifyDataSetChanged();
             }
 
@@ -131,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
 
                 homeScreenAdapter = new HomeScreenAdapter(MainActivity.this, articlesList);
                 recyclerView.setAdapter(homeScreenAdapter);
+
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
                 homeScreenAdapter.notifyDataSetChanged();
             }
 
@@ -139,30 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "ERROR !!!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.sign_out_menu_btn:
-                mGoogleSignInClient.signOut()
-                        .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(MainActivity.this, "Logged Out Successfully !!!", Toast.LENGTH_SHORT).show();
-                                sendToSignInActivity();
-                                finish();
-                            }
-                        });
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void getSearchedNews(){
@@ -180,6 +173,10 @@ public class MainActivity extends AppCompatActivity {
 
                 homeScreenAdapter = new HomeScreenAdapter(MainActivity.this, articlesList);
                 recyclerView.setAdapter(homeScreenAdapter);
+
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
                 homeScreenAdapter.notifyDataSetChanged();
             }
 
@@ -191,10 +188,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showAlertDialog(){
-
         articlesList.clear();
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
         alert.setTitle("Type the news you want to search for ....");
 
         LinearLayout layout = new LinearLayout(this);
@@ -227,6 +224,30 @@ public class MainActivity extends AppCompatActivity {
     public void sendToSignInActivity() {
         Intent intent = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.sign_out_menu_btn:
+                mGoogleSignInClient.signOut()
+                        .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(MainActivity.this, "Logged Out Successfully !!!", Toast.LENGTH_SHORT).show();
+                                sendToSignInActivity();
+                                finish();
+                            }
+                        });
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     boolean doubleBackToExitPressedOnce = false;

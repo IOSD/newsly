@@ -48,7 +48,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.my
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final myViewHolder holder, final int position) {
 
             Picasso.get()
                     .load(mResultList.get(position).getUrlToImage())
@@ -60,6 +60,15 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.my
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, DetailActivity.class);
+
+                    intent.putExtra("author", mResultList.get(position).getAuthor());
+                    intent.putExtra("source", mResultList.get(position).getSource().getName());
+                    intent.putExtra("title", mResultList.get(position).getTitle());
+                    intent.putExtra("description", mResultList.get(position).getDescription());
+                    intent.putExtra("url", mResultList.get(position).getUrl());
+                    intent.putExtra("urlToImage", mResultList.get(position).getUrlToImage());
+                    intent.putExtra("publishedAt", mResultList.get(position).getPublishedAt());
+
                     mContext.startActivity(intent);
                 }
             });

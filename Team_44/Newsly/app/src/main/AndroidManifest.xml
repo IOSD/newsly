@@ -22,7 +22,8 @@
 
         <activity android:name="com.jain.tavish.newsly.UI.MainActivity"/>
 
-        <activity android:name=".UI.DetailActivity"/>
+        <activity android:name=".UI.DetailActivity"
+            android:parentActivityName=".UI.MainActivity"/>
 
     </application>
 

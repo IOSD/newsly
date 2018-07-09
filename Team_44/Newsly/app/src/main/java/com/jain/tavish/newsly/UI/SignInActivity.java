@@ -68,6 +68,7 @@ public class SignInActivity extends AppCompatActivity {
             if(account != null) {
                 Toast.makeText(this, "Welcome Back !!!", Toast.LENGTH_SHORT).show();
                 sendToMainActivity();
+                finish();
             }
         } catch (ApiException e) {
             Log.w("tavish", "signInResult:failed code=" + e.getStatusCode());

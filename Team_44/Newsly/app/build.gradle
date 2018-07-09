@@ -34,6 +34,20 @@ dependencies {
     //constraint layout
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //recyclerView
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //cardview
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    //design library
+    implementation 'com.android.support:design:27.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

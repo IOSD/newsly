@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.jain.tavish.newsly.SignInActivity">
+        <activity android:name="com.jain.tavish.newsly.UI.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.jain.tavish.newsly.MainActivity"/>
+        <activity android:name="com.jain.tavish.newsly.UI.MainActivity"/>
+
+        <activity android:name=".UI.DetailActivity"/>
 
     </application>
 

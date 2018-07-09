@@ -1,4 +1,4 @@
-package com.jain.tavish.newsly;
+package com.jain.tavish.newsly.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,20 +15,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.jain.tavish.newsly.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SignInActivity extends AppCompatActivity {
 
     public static final int RC_SIGN_IN_GOOGLE = 1;
     public GoogleSignInOptions googleSignInOptions;
     public GoogleSignInClient mGoogleSignInClient;
-    public SignInButton signInButton;
+    public @BindView(R.id.sign_in_google) SignInButton signInButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        signInButton = findViewById(R.id.sign_in_google);
+        ButterKnife.bind(this);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()

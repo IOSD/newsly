@@ -5,4 +5,5 @@
     <item android:title="Sign Out"
         app:showAsAction="never"
         android:id="@+id/sign_out_menu_btn"/>
+
 </menu>

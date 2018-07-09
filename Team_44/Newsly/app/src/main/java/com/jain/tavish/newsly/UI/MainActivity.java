@@ -1,15 +1,20 @@
 package com.jain.tavish.newsly.UI;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -40,10 +45,13 @@ public class MainActivity extends AppCompatActivity {
     public GoogleSignInClient mGoogleSignInClient;
     public GoogleSignInOptions googleSignInOptions;
     public @BindView(R.id.recycler_view_main) RecyclerView recyclerView;
+    public @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
     public HomeScreenAdapter homeScreenAdapter;
     public Call<APIResults> apiResultsCall;
     public List<Articles> articlesList;
     public APIResults apiResults;
+
+    public String dialogText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +66,47 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
+        getNationalNews();
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.action_national_news:
+                        getNationalNews();
+                        break;
+                    case R.id.action_international_news:
+                        getInternationalNews();
+                        break;
+                    case R.id.action_search:
+                        showAlertDialog();
+                        break;
+
+                }
+                return true;
+            }
+        });
+    }
+
+    public void getInternationalNews(){
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        apiResultsCall = apiInterface.getTopHeadlines(API_KEY, "in");
+        apiResultsCall = apiInterface.getInternationalNews(API_KEY, "the-washington-post");
         apiResultsCall.enqueue(new Callback<APIResults>() {
             @Override
             public void onResponse(Call<APIResults> call, Response<APIResults> response) {
                 apiResults = response.body();
+
+                if(articlesList != null){
+                    articlesList.clear();
+                }
                 articlesList = apiResults.getArticles();
 
                 homeScreenAdapter = new HomeScreenAdapter(MainActivity.this, articlesList);
                 recyclerView.setAdapter(homeScreenAdapter);
+                homeScreenAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -75,10 +114,31 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "ERROR !!!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    public void getNationalNews(){
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        apiResultsCall = apiInterface.getTopHeadlines(API_KEY, "in");
+        apiResultsCall.enqueue(new Callback<APIResults>() {
+            @Override
+            public void onResponse(Call<APIResults> call, Response<APIResults> response) {
+                apiResults = response.body();
 
+                if(articlesList != null){
+                    articlesList.clear();
+                }
+                articlesList = apiResults.getArticles();
+
+                homeScreenAdapter = new HomeScreenAdapter(MainActivity.this, articlesList);
+                recyclerView.setAdapter(homeScreenAdapter);
+                homeScreenAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<APIResults> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "ERROR !!!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -103,6 +163,65 @@ public class MainActivity extends AppCompatActivity {
                         });
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getSearchedNews(){
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        apiResultsCall = apiInterface.getSearchedNews(API_KEY, dialogText);
+        apiResultsCall.enqueue(new Callback<APIResults>() {
+            @Override
+            public void onResponse(Call<APIResults> call, Response<APIResults> response) {
+                apiResults = response.body();
+
+                if(articlesList != null){
+                    articlesList.clear();
+                }
+                articlesList = apiResults.getArticles();
+
+                homeScreenAdapter = new HomeScreenAdapter(MainActivity.this, articlesList);
+                recyclerView.setAdapter(homeScreenAdapter);
+                homeScreenAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<APIResults> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "ERROR !!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void showAlertDialog(){
+
+        articlesList.clear();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Type the news you want to search for ....");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(70, 0, 80, 0);
+
+        final EditText textBox = new EditText(MainActivity.this);
+        layout.addView(textBox, params);
+
+        alert.setView(layout);
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialogText = textBox.getText().toString();
+                getSearchedNews();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.show();
     }
 
     public void sendToSignInActivity() {

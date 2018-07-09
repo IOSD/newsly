@@ -52,7 +52,8 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.my
 
             Picasso.get()
                     .load(mResultList.get(position).getUrlToImage())
-                    .error(R.drawable.scrim_item)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
                     .into(holder.mImageView);
             holder.tv_headline.setText(mResultList.get(position).getTitle());
 

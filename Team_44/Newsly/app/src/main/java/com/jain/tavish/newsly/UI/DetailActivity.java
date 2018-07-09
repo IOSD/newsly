@@ -58,6 +58,8 @@ public class DetailActivity extends AppCompatActivity{
 
         Picasso.get()
                 .load(urlToImage)
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
                 .into(imageView);
 
         collapsingToolbarLayout.setTitle(title);

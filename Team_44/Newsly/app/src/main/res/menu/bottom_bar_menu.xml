@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_national_news"
+        android:title="National News"
+        android:icon="@drawable/ic_national_news" />
+
+    <item android:id="@+id/action_international_news"
+        android:title="International News"
+        android:icon="@drawable/ic_international_news" />
+
+    <item android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search" />
+
+</menu>

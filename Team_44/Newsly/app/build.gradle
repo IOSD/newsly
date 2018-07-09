@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.jain.tavish.newsly"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    //annotations
+    implementation 'com.android.support:support-annotations:27.1.1'
+    //firebase
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    //google play services
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.android.support:support-media-compat:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    //constraint layout
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //recyclerView
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //cardview
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    //design library
+    implementation 'com.android.support:design:27.1.1'
+}
+
+apply plugin: 'com.google.gms.google-services'

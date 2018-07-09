@@ -15,6 +15,9 @@ import android.widget.TextView;
 import com.jain.tavish.newsly.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -58,8 +61,6 @@ public class DetailActivity extends AppCompatActivity{
 
         Picasso.get()
                 .load(urlToImage)
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
                 .into(imageView);
 
         collapsingToolbarLayout.setTitle(title);
@@ -77,6 +78,14 @@ public class DetailActivity extends AppCompatActivity{
 
         if(publishedAt == null){
             publishedAt = "~No Date Available~";
+        }
+        try {
+            SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            Date newDate = spf.parse(publishedAt);
+            spf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss aa");
+            publishedAt = spf.format(newDate);
+        }catch (Exception e){
+
         }
         tv_published_at.setText(publishedAt);
 

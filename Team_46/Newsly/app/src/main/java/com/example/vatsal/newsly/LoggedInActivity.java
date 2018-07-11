@@ -12,7 +12,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.vatsal.newsly.Adapters.ViewPagerAdapter;
+import com.example.vatsal.newsly.Models.News;
+import com.example.vatsal.newsly.api.ApiClient;
+import com.example.vatsal.newsly.api.ApiInterface;
 import com.facebook.login.LoginManager;
+
+import retrofit2.Call;
 
 public class LoggedInActivity extends AppCompatActivity {
     boolean isGoogleAccount;
@@ -29,13 +34,14 @@ public class LoggedInActivity extends AppCompatActivity {
         isGoogleAccount = intent.getExtras().getBoolean(SignInActivity.isGoogleAccount);
 
 
-         viewPager = findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override

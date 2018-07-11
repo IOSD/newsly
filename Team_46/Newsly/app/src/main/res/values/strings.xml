@@ -3,5 +3,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="facebook_app_id">1875749169153153</string>
     <string name="fb_login_protocol_scheme">fb1875749169153153</string>
-    <string name="news_api_key">fc38d9df77174f81be9e0d9bbc2430ce</string>
+    <!--<string name="news_api_key">fc38d9df77174f81be9e0d9bbc2430ce</string>-->
+    <!--<string name="sources">abc-news,bbc-sport,bleacher-report,bloomberg,buzzfeed,cnbc,cnn,daily-mail,espn,four-four-two,google-news,mirror,national-geographic,news24,reddit-r-all,techcrunch,the-hindu,the-sport-bible,the-telegraph,the-times-of-india</string>-->
 </resources>

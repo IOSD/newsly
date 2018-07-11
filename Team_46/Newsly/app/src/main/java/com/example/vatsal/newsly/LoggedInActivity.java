@@ -29,7 +29,7 @@ public class LoggedInActivity extends AppCompatActivity {
         isGoogleAccount = intent.getExtras().getBoolean(SignInActivity.isGoogleAccount);
 
 
-        viewPager = findViewById(R.id.viewpager);
+         viewPager = findViewById(R.id.viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 

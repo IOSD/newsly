@@ -12,9 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.vatsal.newsly.Adapters.ViewPagerAdapter;
-import com.example.vatsal.newsly.Models.News;
-import com.example.vatsal.newsly.api.ApiClient;
-import com.example.vatsal.newsly.api.ApiInterface;
 import com.facebook.login.LoginManager;
 
 import retrofit2.Call;

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.vatsal.newsly.Adapters.RecyclerViewAdapter;
 import com.example.vatsal.newsly.Models.Article;
-import com.example.vatsal.newsly.Models.News;
+import com.example.vatsal.newsly.Models.Main;
 import com.example.vatsal.newsly.R;
 import com.example.vatsal.newsly.api.ApiClient;
 import com.example.vatsal.newsly.api.ApiInterface;
@@ -23,6 +23,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class NewsFragment extends Fragment {
@@ -33,9 +35,10 @@ public class NewsFragment extends Fragment {
     RecyclerViewAdapter adapter;
     ApiInterface apiService;
     public static final String TAG = "TAG";
+    public static final String BASE_URL = "https://newsapi.org/v2/";
     public final String API_KEY = "fc38d9df77174f81be9e0d9bbc2430ce";
     public final String sources = "abc-news,bbc-sport,bleacher-report,bloomberg,buzzfeed,cnbc,cnn,daily-mail,espn,four-four-two,google-news,mirror,national-geographic,news24,reddit-r-all,techcrunch,the-hindu,the-sport-bible,the-telegraph,the-times-of-india";
-    Call<News> call;
+    Call<Main> call;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
@@ -58,16 +61,17 @@ public class NewsFragment extends Fragment {
         return view;
     }
 
-    Callback<News> callback = new Callback<News>() {
+    Callback<Main> callback = new Callback<Main>() {
         @Override
-        public void onResponse(Call<News> call, Response<News> response) {
+        public void onResponse(Call<Main> call, Response<Main> response) {
             List<Article> list = response.body().getArticles();
+            Log.d(TAG, "onResponse: Successfully got articles");
             adapter = new RecyclerViewAdapter(list, getContext());
             recyclerView.setAdapter(adapter);
         }
 
         @Override
-        public void onFailure(Call<News> call, Throwable t) {
+        public void onFailure(Call<Main> call, Throwable t) {
             Log.d(TAG, "onFailure: failed");
             Log.d(TAG, "onFailure: " + t.getMessage());
         }
@@ -78,7 +82,6 @@ public class NewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getContext());
-
         apiService = ApiClient.getClient().create(ApiInterface.class);
         if (position == 0) {
             call = apiService.getTopHeadlines(API_KEY, "en", "popularity", sources, 1, 30);

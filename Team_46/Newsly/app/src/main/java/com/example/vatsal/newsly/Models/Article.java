@@ -3,8 +3,6 @@ package com.example.vatsal.newsly.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import okio.Source;
-
 public class Article {
 
     @SerializedName("source")

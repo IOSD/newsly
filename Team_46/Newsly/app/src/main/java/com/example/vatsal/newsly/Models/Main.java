@@ -4,7 +4,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class News {
+public class Main {
 
     @SerializedName("status")
     @Expose
@@ -39,4 +39,5 @@ public class News {
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
+
 }

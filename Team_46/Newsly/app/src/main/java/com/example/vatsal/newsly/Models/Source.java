@@ -7,16 +7,16 @@ public class Source {
 
     @SerializedName("id")
     @Expose
-    private String id;
+    private Object id;
     @SerializedName("name")
     @Expose
     private String name;
 
-    public String getId() {
+    public Object getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Object id) {
         this.id = id;
     }
 

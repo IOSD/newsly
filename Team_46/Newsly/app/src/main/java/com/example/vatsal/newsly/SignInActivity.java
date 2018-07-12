@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -75,7 +76,8 @@ public class SignInActivity extends AppCompatActivity {
 
         // Facebook Sign In
 
-
+        if (isLoggedIn())
+            sendToSecondActivity(false);
 
 
         loginButton = findViewById(R.id.login_button);
@@ -123,8 +125,7 @@ public class SignInActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             sendToSecondActivity(true);
-        }
-        else
+        } else
             callbackManager.onActivityResult(requestCode, resultCode, data);
 
 
@@ -142,5 +143,10 @@ public class SignInActivity extends AppCompatActivity {
         Intent i = new Intent(SignInActivity.this, LoggedInActivity.class);
         i.putExtra(isGoogleAccount, isGoogle);
         startActivity(i);
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 }

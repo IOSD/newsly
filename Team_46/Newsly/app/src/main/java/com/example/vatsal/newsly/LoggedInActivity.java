@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.facebook.login.LoginManager;
 
 public class LoggedInActivity extends AppCompatActivity {
     boolean isGoogleAccount;
-
+    Button nextbt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,16 @@ public class LoggedInActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent intent = getIntent();
         isGoogleAccount = intent.getExtras().getBoolean(SignInActivity.isGoogleAccount);
+
+        nextbt = findViewById(R.id.btnNext);
+
+        nextbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next = new Intent(LoggedInActivity.this , LoggedIn.class);
+                startActivity(next);
+            }
+        });
     }
 
     @Override

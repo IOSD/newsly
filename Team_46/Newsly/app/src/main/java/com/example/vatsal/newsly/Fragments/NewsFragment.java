@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,12 @@ import com.example.vatsal.newsly.R;
 import com.example.vatsal.newsly.api.ApiClient;
 import com.example.vatsal.newsly.api.ApiInterface;
 
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class NewsFragment extends Fragment {
@@ -34,11 +32,12 @@ public class NewsFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerViewAdapter adapter;
     ApiInterface apiService;
+    List<Article> list;
+    int index;
     public static final String TAG = "TAG";
     public static final String BASE_URL = "https://newsapi.org/v2/";
     public final String API_KEY = "fc38d9df77174f81be9e0d9bbc2430ce";
     public final String sources = "abc-news,bbc-sport,bleacher-report,bloomberg,buzzfeed,cnbc,cnn,daily-mail,espn,four-four-two,google-news,mirror,national-geographic,news24,reddit-r-all,techcrunch,the-hindu,the-sport-bible,the-telegraph,the-times-of-india";
-    Call<Main> call;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
@@ -64,16 +63,13 @@ public class NewsFragment extends Fragment {
     Callback<Main> callback = new Callback<Main>() {
         @Override
         public void onResponse(Call<Main> call, Response<Main> response) {
-            List<Article> list = response.body().getArticles();
-            Log.d(TAG, "onResponse: Successfully got articles");
+            list = response.body().getArticles();
             adapter = new RecyclerViewAdapter(list, getContext());
             recyclerView.setAdapter(adapter);
         }
 
         @Override
         public void onFailure(Call<Main> call, Throwable t) {
-            Log.d(TAG, "onFailure: failed");
-            Log.d(TAG, "onFailure: " + t.getMessage());
         }
     };
 
@@ -82,12 +78,51 @@ public class NewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<Main> call;
         if (position == 0) {
             call = apiService.getTopHeadlines(API_KEY, "en", "popularity", sources, 1, 30);
+        } else if (position == 1) {
+            call = apiService.getTopHeadlines(API_KEY, "en", "the-hindu,the-times-of-india", 1, 30);
         } else {
-            call = apiService.getHeadlines(API_KEY, "en", sources, 1, 30);
+            call = apiService.getTopHeadlines(API_KEY, "en", sources, 1, 30);
         }
         call.enqueue(callback);
+        index = 1;
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!recyclerView.canScrollVertically(1))
+                    onScrolledToBottom();
+            }
+        });
+    }
+
+    Callback<Main> callback1 = new Callback<Main>() {
+        @Override
+        public void onResponse(Call<Main> call, Response<Main> response) {
+            List<Article> articles = response.body().getArticles();
+            list.addAll(articles);
+            adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onFailure(Call<Main> call, Throwable t) {
+
+        }
+    };
+
+    private void onScrolledToBottom() {
+        Call<Main> call;
+        if (position == 0) {
+            call = apiService.getTopHeadlines(API_KEY, "en", "popularity", sources, ++index, 30);
+        } else if (position == 1) {
+            call = apiService.getTopHeadlines(API_KEY, "en", "the-hindu,the-times-of-india", ++index, 30);
+        } else {
+            call = apiService.getTopHeadlines(API_KEY, "en", sources, ++index, 30);
+        }
+        call.enqueue(callback1);
     }
 }

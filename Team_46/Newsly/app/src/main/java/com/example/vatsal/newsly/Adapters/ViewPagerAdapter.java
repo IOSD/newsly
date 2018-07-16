@@ -9,7 +9,7 @@ import com.example.vatsal.newsly.Fragments.NewsFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    public String title[] = {"Latest News", "National and International News"};
+    public String title[] = {"Latest News", "National News", "International News"};
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);

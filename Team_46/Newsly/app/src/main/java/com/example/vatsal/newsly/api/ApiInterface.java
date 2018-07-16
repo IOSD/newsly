@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("everything")
-    Call<Main> getHeadlines(@Query("apiKey") String apiKey,
+    Call<Main> getTopHeadlines(@Query("apiKey") String apiKey,
                             @Query("language") String lan,
                             @Query("sources") String sources,
                             @Query("page") Integer page,
@@ -22,4 +22,13 @@ public interface ApiInterface {
                                @Query("sources") String sources,
                                @Query("page") Integer page,
                                @Query("pageSize") Integer pageSize);
+
+//    @GET("everything")
+//    Call<Main> getTopHeadlines(@Query("apiKey") String apiKey,
+//                               @Query("language") String lan,
+//                               @Query("sources") String sources,
+//                               @Query("page") Integer page,
+//                               @Query("pageSize") Integer pageSize,
+//                               @Query("country") String country);
+
 }

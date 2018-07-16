@@ -17,7 +17,7 @@ import java.util.List;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<Article> dataset;
+    List<Article> dataset;
     Context context;
 
     @NonNull
@@ -53,8 +53,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
-            textView = view.findViewById(R.id.text);
-            imageView = view.findViewById(R.id.image);
+            textView = view.findViewById(R.id.textView);
+            imageView = view.findViewById(R.id.imageView);
         }
     }
 

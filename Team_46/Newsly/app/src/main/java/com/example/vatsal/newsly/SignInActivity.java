@@ -29,6 +29,7 @@ import java.util.Arrays;
 public class SignInActivity extends AppCompatActivity {
 
     private static final int RC_GOOGLE_SIGN_IN = 1;
+    public static final String API_KEY="61f35f2df49b4e559e21b35973523e85";
     static GoogleSignInClient mGoogleSignInClient;
     SignInButton signInButton;
     public static final String TAG = "TAG";

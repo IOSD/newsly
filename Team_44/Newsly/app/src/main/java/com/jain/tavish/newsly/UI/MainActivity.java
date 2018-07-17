@@ -42,7 +42,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String API_KEY = "";
+    public static final String API_KEY = "b6c867599dd841e7b1dff94143d6df82";
 
     public @BindView(R.id.progress_bar) ProgressBar progressBar;
     public GoogleSignInClient mGoogleSignInClient;

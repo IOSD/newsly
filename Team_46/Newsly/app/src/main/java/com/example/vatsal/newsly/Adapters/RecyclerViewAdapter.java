@@ -13,12 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.vatsal.newsly.LoggedInActivity;
 import com.example.vatsal.newsly.Models.Article;
 import com.example.vatsal.newsly.R;
 import com.example.vatsal.newsly.WebPage;
-import com.example.vatsal.newsly.Models.Article;
-import com.example.vatsal.newsly.R;
 
 import java.util.List;
 

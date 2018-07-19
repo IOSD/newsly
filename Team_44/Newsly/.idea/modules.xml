@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Newsly.iml" filepath="$PROJECT_DIR$/Newsly.iml" />
+      <module fileurl="file://D:\Deepanshi\programming\newsly\Team_44\Newsly\Newsly.iml" filepath="D:\Deepanshi\programming\newsly\Team_44\Newsly\Newsly.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Deepanshi\programming\newsly\Team_44\Newsly\app\app.iml" filepath="D:\Deepanshi\programming\newsly\Team_44\Newsly\app\app.iml" />
     </modules>
   </component>
 </project>

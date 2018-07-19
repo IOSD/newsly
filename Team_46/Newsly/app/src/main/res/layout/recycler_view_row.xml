@@ -6,10 +6,7 @@
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-<<<<<<< HEAD
         android:id="@+id/card_view"
-=======
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="3dp"
@@ -24,13 +21,8 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-<<<<<<< HEAD
                 android:layout_height="match_parent"
                 android:scaleType="fitXY" />
-=======
-                android:scaleType="fitXY"
-                android:layout_height="match_parent" />
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 
             <TextView
                 android:id="@+id/textView"
@@ -38,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-<<<<<<< HEAD
                 android:background="#fff"
                 android:maxLines="2"
                 android:paddingHorizontal="3dp"

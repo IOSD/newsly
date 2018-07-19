@@ -1,34 +1,24 @@
 package com.example.vatsal.newsly.Adapters;
 
 import android.content.Context;
-<<<<<<< HEAD
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
-=======
-import android.support.annotation.NonNull;
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
 import android.widget.Button;
-=======
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-<<<<<<< HEAD
 import com.example.vatsal.newsly.LoggedInActivity;
 import com.example.vatsal.newsly.Models.Article;
 import com.example.vatsal.newsly.R;
 import com.example.vatsal.newsly.WebPage;
-=======
 import com.example.vatsal.newsly.Models.Article;
 import com.example.vatsal.newsly.R;
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 
 import java.util.List;
 
@@ -47,18 +37,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-<<<<<<< HEAD
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final Article item = dataset.get(position);
-=======
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Article item = dataset.get(position);
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
         holder.textView.setText(item.getTitle());
         Glide.with(context)
                 .load(item.getUrlToImage())
                 .into(holder.imageView);
-<<<<<<< HEAD
         showFront(holder);
         holder.description.setText(item.getDescription());
         holder.button.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +65,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             }
         });
-=======
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
-
     }
 
     @Override
@@ -95,28 +76,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView textView;
         ImageView imageView;
-<<<<<<< HEAD
         CardView cardView;
         TextView description;
         Button button;
-        View view;
         boolean isFront;
-=======
         View view;
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
             textView = view.findViewById(R.id.textView);
             imageView = view.findViewById(R.id.imageView);
-<<<<<<< HEAD
             cardView = view.findViewById(R.id.card_view);
             description = view.findViewById(R.id.description);
             button = view.findViewById(R.id.button);
             isFront = true;
-=======
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
         }
     }
 
@@ -124,7 +98,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.dataset = dataset;
         this.context = context;
     }
-<<<<<<< HEAD
 
     public void showRear(ViewHolder holder) {
         holder.isFront = false;
@@ -143,6 +116,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.button.setAlpha(0f);
         holder.button.setClickable(false);
     }
-=======
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 }

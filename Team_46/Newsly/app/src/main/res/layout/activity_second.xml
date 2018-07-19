@@ -27,8 +27,5 @@
         android:layout_below="@+id/bar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 </RelativeLayout>

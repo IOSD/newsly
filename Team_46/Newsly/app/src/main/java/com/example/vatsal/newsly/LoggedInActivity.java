@@ -14,6 +14,13 @@ import android.view.MenuItem;
 import com.example.vatsal.newsly.Adapters.ViewPagerAdapter;
 import com.facebook.login.LoginManager;
 
+<<<<<<< HEAD
+=======
+//<<<<<<< HEAD
+//=======
+//import retrofit2.Call;
+//>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
+>>>>>>> 3c0d11634d5500a221f39a75625be15e90748f3c
 
 public class LoggedInActivity extends AppCompatActivity {
     boolean isGoogleAccount;

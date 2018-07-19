@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
 
 public class LoginPage extends AppCompatActivity {
 
@@ -58,9 +58,6 @@ public class LoginPage extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-//                Log.w(TAG, "Google sign in failed", e);
-                // ...
                 Toast.makeText(this,"Login Failed :( Try Again \n"+e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }
@@ -85,7 +82,7 @@ public class LoginPage extends AppCompatActivity {
                             Intent i=new Intent(LoginPage.this,HomeScreen.class);
                             startActivity(i);
                         } else {
-                                Toast.makeText(LoginPage.this,"LoginFailed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginPage.this,"Login Failed",Toast.LENGTH_SHORT).show();
                                }
                     }
                 });
@@ -98,8 +95,7 @@ public class LoginPage extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null){
             finish();
-            Intent i=new Intent(LoginPage.this,HomeScreen.class);
-            startActivity(i);
+            startActivity(new Intent(LoginPage.this,HomeScreen.class));
         }
     }
 

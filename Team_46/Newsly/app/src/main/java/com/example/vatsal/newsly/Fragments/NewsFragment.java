@@ -9,7 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.ProgressBar;
+=======
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 
 import com.example.vatsal.newsly.Adapters.RecyclerViewAdapter;
 import com.example.vatsal.newsly.Models.Article;
@@ -34,7 +37,10 @@ public class NewsFragment extends Fragment {
     RecyclerViewAdapter adapter;
     ApiInterface apiService;
     List<Article> list;
+<<<<<<< HEAD
     ProgressBar progressBar;
+=======
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
     int index;
     public static final String TAG = "TAG";
     public static final String BASE_URL = "https://newsapi.org/v2/";
@@ -68,7 +74,10 @@ public class NewsFragment extends Fragment {
             list = response.body().getArticles();
             adapter = new RecyclerViewAdapter(list, getContext());
             recyclerView.setAdapter(adapter);
+<<<<<<< HEAD
             progressBar.setAlpha(0f);
+=======
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
         }
 
         @Override
@@ -79,8 +88,11 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+<<<<<<< HEAD
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setAlpha(1f);
+=======
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
         recyclerView = view.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

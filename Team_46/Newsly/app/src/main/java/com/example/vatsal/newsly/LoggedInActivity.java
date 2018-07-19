@@ -2,19 +2,29 @@ package com.example.vatsal.newsly;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
+import com.example.vatsal.newsly.Adapters.ViewPagerAdapter;
 import com.facebook.login.LoginManager;
+
+<<<<<<< HEAD
+=======
+import retrofit2.Call;
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
 
 public class LoggedInActivity extends AppCompatActivity {
     boolean isGoogleAccount;
-    Button nextbt;
+    Toolbar toolbar;
+    TabLayout tabLayout;
+    ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +33,15 @@ public class LoggedInActivity extends AppCompatActivity {
         Intent intent = getIntent();
         isGoogleAccount = intent.getExtras().getBoolean(SignInActivity.isGoogleAccount);
 
-        nextbt = findViewById(R.id.btnNext);
 
-        nextbt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent next = new Intent(LoggedInActivity.this , LoggedIn.class);
-                startActivity(next);
-            }
-        });
+        viewPager = findViewById(R.id.viewpager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override

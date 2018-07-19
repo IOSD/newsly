@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<<<<<<< HEAD
+        android:id="@+id/card_view"
+=======
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+<<<<<<< HEAD
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+=======
+                android:scaleType="fitXY"
+                android:layout_height="match_parent" />
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+<<<<<<< HEAD
+                android:background="#fff"
+                android:maxLines="2"
+                android:paddingHorizontal="3dp"
+                android:text="text"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="0dp"
+                android:alpha="0"
+                android:clickable="false"
+                android:text="Full Article"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:alpha="0"
+                android:text="TextView" />
+=======
+                android:maxLines="2"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:background="#fff"
+                android:paddingHorizontal="3dp"
+                android:text="text"
+                android:textSize="20sp" />
+>>>>>>> 773f95ad8d41933f40ecdd95cc61aa7d14927e87
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

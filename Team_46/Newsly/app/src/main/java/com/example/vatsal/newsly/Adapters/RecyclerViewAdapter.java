@@ -13,18 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-<<<<<<< HEAD
 import com.example.vatsal.newsly.Models.Article;
 import com.example.vatsal.newsly.R;
 import com.example.vatsal.newsly.WebPage;
-=======
-import com.example.vatsal.newsly.LoggedInActivity;
-import com.example.vatsal.newsly.Models.Article;
-import com.example.vatsal.newsly.R;
-import com.example.vatsal.newsly.WebPage;
-import com.example.vatsal.newsly.Models.Article;
-import com.example.vatsal.newsly.R;
->>>>>>> 3c0d11634d5500a221f39a75625be15e90748f3c
 
 import java.util.List;
 
@@ -86,10 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView description;
         Button button;
         boolean isFront;
-<<<<<<< HEAD
-=======
         View view;
->>>>>>> 3c0d11634d5500a221f39a75625be15e90748f3c
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -125,8 +113,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.button.setAlpha(0f);
         holder.button.setClickable(false);
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 3c0d11634d5500a221f39a75625be15e90748f3c
 }

@@ -15,8 +15,4 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/progress_bar"
         android:alpha="0"/>
-<<<<<<< HEAD
 </RelativeLayout>
-=======
-</RelativeLayout>
->>>>>>> 3c0d11634d5500a221f39a75625be15e90748f3c

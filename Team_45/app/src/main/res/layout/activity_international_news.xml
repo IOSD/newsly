@@ -11,6 +11,7 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="?android:attr/colorPrimary"
         android:elevation="4dp"
+        app:title="International News"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 

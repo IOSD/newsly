@@ -142,9 +142,6 @@ public class HomeScreen extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "No news found", Toast.LENGTH_SHORT).show();
             }
         }
-
-
-
     }
 
     public void signOut(){
@@ -159,7 +156,6 @@ public class HomeScreen extends AppCompatActivity {
         if(mAuth.getCurrentUser()==null){
             startActivity(new Intent(this,LoginPage.class));
         }
-
     }
 
     @Override
@@ -188,6 +184,5 @@ public class HomeScreen extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
-
     }
 }

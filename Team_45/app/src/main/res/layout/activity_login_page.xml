@@ -10,9 +10,8 @@
         android:id="@+id/imageProfile"
         android:layout_width="234dp"
         android:layout_height="255dp"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
         android:src="@drawable/profilepic" />
 
     <com.google.android.gms.common.SignInButton
@@ -21,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="98dp"/>
+        android:layout_marginBottom="131dp" />
 
     <TextView
         android:id="@+id/textView2"

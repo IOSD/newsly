@@ -1,23 +1,19 @@
 package com.aroraharsh010.newsly;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,11 +22,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-public class HomeScreen extends AppCompatActivity {
+public class InternationalNews extends AppCompatActivity {
     String API_KEY = "8190df9eb51445228e397e4185311a66";
-    public static String NEWS_SOURCE = "the-times-of-india";//Any news source would do
+    public static String NEWS_SOURCE = "bbc-news";//Any news source would do
     ListView listNews;
     ProgressBar loader;
     ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
@@ -40,12 +34,15 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_URL = "url";
     public static final String KEY_URLTOIMAGE = "urlToImage";
     public static final String KEY_PUBLISHEDAT = "publishedAt";
-
     FirebaseAuth mAuth;
+    MenuItem item2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_international_news);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -68,7 +65,7 @@ public class HomeScreen extends AppCompatActivity {
                 break;
             }
             case R.id.international_news:{
-                startActivity(new Intent(HomeScreen.this,InternationalNews.class));
+                startActivity(new Intent(InternationalNews.this,HomeScreen.class));
                 break;
             }
         }
@@ -79,7 +76,7 @@ public class HomeScreen extends AppCompatActivity {
         listNews.setEmptyView(loader);
         if(Function.isNetworkAvailable(getApplicationContext()))
         {
-            DownloadNews newsTask = new DownloadNews();
+            InternationalNews.DownloadNews newsTask = new InternationalNews.DownloadNews();
             newsTask.execute();
         }else{
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -123,13 +120,13 @@ public class HomeScreen extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
                 }
 
-                ListNewsAdapter adapter = new ListNewsAdapter(HomeScreen.this, dataList);
+                ListNewsAdapter adapter = new ListNewsAdapter(InternationalNews.this, dataList);
                 listNews.setAdapter(adapter);
 
                 listNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-                        Intent i = new Intent(HomeScreen.this, DetailsActivity.class);
+                        Intent i = new Intent(InternationalNews.this, DetailsActivity.class);
                         i.putExtra("url", dataList.get(+position).get(KEY_URL));
                         startActivity(i);
                     }
@@ -139,8 +136,6 @@ public class HomeScreen extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "No news found", Toast.LENGTH_SHORT).show();
             }
         }
-
-
 
     }
 

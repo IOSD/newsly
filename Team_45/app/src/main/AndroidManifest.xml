@@ -42,7 +42,8 @@
         </activity>
         <activity android:name=".LoginPage" />
         <activity android:name=".HomeScreen" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity" />
+        <activity android:name=".InternationalNews"></activity>
     </application>
 
 </manifest>

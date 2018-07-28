@@ -83,7 +83,7 @@ public class LoginPage extends AppCompatActivity {
                             startActivity(i);
                         } else {
                             Toast.makeText(LoginPage.this,"Login Failed",Toast.LENGTH_SHORT).show();
-                               }
+                            }
                     }
                 });
     }

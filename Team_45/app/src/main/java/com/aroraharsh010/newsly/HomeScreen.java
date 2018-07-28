@@ -3,6 +3,9 @@ package com.aroraharsh010.newsly;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity {
     String API_KEY = "8190df9eb51445228e397e4185311a66";
-    String NEWS_SOURCE = "the-times-of-india";//Any news source would do
+    public static String NEWS_SOURCE = "the-times-of-india";//Any news source would do
     ListView listNews;
     ProgressBar loader;
     ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
@@ -43,11 +46,33 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
+        mAuth=FirebaseAuth.getInstance();
         listNews = (ListView) findViewById(R.id.listNews);
         loader = (ProgressBar) findViewById(R.id.loader);
-        listNews.setEmptyView(loader);
+        myFunction();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sign_out: {
+                signOut();
+                break;
+            }
+        }
+        return false;
+    }
+
+    public void myFunction(){
+        listNews.setEmptyView(loader);
         if(Function.isNetworkAvailable(getApplicationContext()))
         {
             DownloadNews newsTask = new DownloadNews();
@@ -55,8 +80,6 @@ public class HomeScreen extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
         }
-
-        mAuth=FirebaseAuth.getInstance();
     }
 
     class DownloadNews extends AsyncTask<String, Void, String> {
@@ -117,7 +140,7 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-    public void signOut(View view){
+    public void signOut(){
         mAuth.signOut();
         Toast.makeText(this,"Signed out",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this,LoginPage.class));

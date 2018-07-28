@@ -67,6 +67,7 @@ public class InternationalNews extends AppCompatActivity {
                 break;
             }
             case R.id.international_news:{
+                finish();
                 startActivity(new Intent(InternationalNews.this,HomeScreen.class));
                 break;
             }
@@ -143,6 +144,7 @@ public class InternationalNews extends AppCompatActivity {
 
     public void signOut(){
         mAuth.signOut();
+        finish();
         Toast.makeText(this,"Signed out",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this,LoginPage.class));
     }
@@ -151,6 +153,7 @@ public class InternationalNews extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mAuth.getCurrentUser()==null){
+            finish();
             startActivity(new Intent(this,LoginPage.class));
         }
 
@@ -160,13 +163,14 @@ public class InternationalNews extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         if(mAuth.getCurrentUser()==null){
+            finish();
             startActivity(new Intent(this,LoginPage.class));
         }
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (doubleBackToExitPressedOnce) {
+            finish();
             super.onBackPressed();
             return;
         }

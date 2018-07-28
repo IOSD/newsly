@@ -71,6 +71,7 @@ public class HomeScreen extends AppCompatActivity {
                 break;
             }
             case R.id.international_news:{
+                finish();
                 startActivity(new Intent(HomeScreen.this,InternationalNews.class));
                 break;
             }
@@ -147,6 +148,7 @@ public class HomeScreen extends AppCompatActivity {
     public void signOut(){
         mAuth.signOut();
         Toast.makeText(this,"Signed out",Toast.LENGTH_SHORT).show();
+        finish();
         startActivity(new Intent(this,LoginPage.class));
     }
 
@@ -154,6 +156,7 @@ public class HomeScreen extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mAuth.getCurrentUser()==null){
+            finish();
             startActivity(new Intent(this,LoginPage.class));
         }
     }
@@ -162,14 +165,15 @@ public class HomeScreen extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         if(mAuth.getCurrentUser()==null){
+            finish();
             startActivity(new Intent(this,LoginPage.class));
         }
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (doubleBackToExitPressedOnce) {
+            finish();
             super.onBackPressed();
             return;
         }

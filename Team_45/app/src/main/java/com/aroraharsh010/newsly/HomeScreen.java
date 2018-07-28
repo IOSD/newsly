@@ -1,6 +1,7 @@
 package com.aroraharsh010.newsly;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,8 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_URL = "url";
     public static final String KEY_URLTOIMAGE = "urlToImage";
     public static final String KEY_PUBLISHEDAT = "publishedAt";
+    String getNews;
+    boolean doubleBackToExitPressedOnce = false;
 
     FirebaseAuth mAuth;
     @Override
@@ -165,5 +168,26 @@ public class HomeScreen extends AppCompatActivity {
         if(mAuth.getCurrentUser()==null){
             startActivity(new Intent(this,LoginPage.class));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+
     }
 }

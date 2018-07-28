@@ -11,7 +11,7 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/international_news"
-        android:title="International News"
+        android:title="@string/get_news"
         app:showAsAction="never" />
-    
+
 </menu>

@@ -6,12 +6,21 @@
     tools:context=".activity.MainActivity">
 
     <item
-        android:id="@+id/action_sign_out"
-        android:title="Sign Out"
-        app:showAsAction="never"/>
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:iconTint="#000"
+        android:title="Search"/>
+
     <item
         android:id="@+id/international_news"
         android:title="@string/get_news"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sign_out"
+        android:title="Sign Out"
+        app:showAsAction="never"/>
+
 
 </menu>

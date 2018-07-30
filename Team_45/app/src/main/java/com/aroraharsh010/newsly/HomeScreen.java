@@ -162,7 +162,7 @@ public class HomeScreen extends AppCompatActivity {
 
     public void signOut(){
         mAuth.signOut();
-        Toast.makeText(this,"Signed out",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Signed out successfully!!",Toast.LENGTH_SHORT).show();
         finish();
         startActivity(new Intent(this,LoginPage.class));
     }

@@ -46,13 +46,15 @@ public class SearchResultsActivity extends AppCompatActivity {
         Intent intent=getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             query = intent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(this,"Results for search "+query,Toast.LENGTH_SHORT);
 
-        } mAuth=FirebaseAuth.getInstance();
+        }
+        mAuth=FirebaseAuth.getInstance();
         listNews = (ListView) findViewById(R.id.listNews);
         loader = (ProgressBar) findViewById(R.id.loader);
         myFunction();
+        Toast.makeText(this,"Results for  "+query,Toast.LENGTH_LONG);//Not working
     }
+
     public void myFunction(){
         listNews.setEmptyView(loader);
         if(Function.isNetworkAvailable(getApplicationContext()))
@@ -74,7 +76,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             String xml = "";
 
             String urlParameters = "";
-            xml = Function.excuteGet("https://newsapi.org/v2/everything?q="+query+"&apiKey="+API_KEY,urlParameters);
+            xml = Function.excuteGet("https://newsapi.org/v2/everything?q="+query+"&sortBy=relevancy&apiKey="+API_KEY,urlParameters);
             return  xml;
         }
         @Override
@@ -117,13 +119,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "No news found", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    public void signOut(){
-        mAuth.signOut();
-        Toast.makeText(this,"Signed out",Toast.LENGTH_SHORT).show();
-        finish();
-        startActivity(new Intent(this,LoginPage.class));
     }
 
     @Override

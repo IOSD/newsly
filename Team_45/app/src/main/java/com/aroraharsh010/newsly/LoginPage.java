@@ -1,6 +1,7 @@
 package com.aroraharsh010.newsly;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class LoginPage extends AppCompatActivity {
     private static final int RC_SIGN_IN =234 ;
     private FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
+    boolean doubleBackToExitPressedOnce=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,34 @@ public class LoginPage extends AppCompatActivity {
             finish();
             startActivity(new Intent(LoginPage.this,HomeScreen.class));
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(mAuth.getCurrentUser()==null){
+            finish();
+            startActivity(new Intent(this,LoginPage.class));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finish();
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 }

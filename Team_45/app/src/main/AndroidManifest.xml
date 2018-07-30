@@ -41,18 +41,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginPage" />
-        <activity android:name=".HomeScreen">
+        <activity android:name=".HomeScreen"
+            android:launchMode="singleTop">
             <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
         <activity android:name=".DetailsActivity" />
-        <activity android:name=".InternationalNews">
+        <activity android:name=".InternationalNews"
+            android:launchMode="singleTop">
             <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
         <activity android:name=".SearchResultsActivity">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -1,9 +1,11 @@
 package com.aroraharsh010.newsly;
 
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -45,7 +47,7 @@ public class HomeScreen extends AppCompatActivity {
     public static final String KEY_URL = "url";
     public static final String KEY_URLTOIMAGE = "urlToImage";
     public static final String KEY_PUBLISHEDAT = "publishedAt";
-    String getNews;
+    Menu mMenu;
     boolean doubleBackToExitPressedOnce = false;
 
     FirebaseAuth mAuth;
@@ -54,6 +56,8 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        mMenu=myToolbar.getMenu();
+        mMenu.setGroupVisible(R.id.national_news,false);
         setSupportActionBar(myToolbar);
 
         mAuth=FirebaseAuth.getInstance();
@@ -65,18 +69,14 @@ public class HomeScreen extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
 
-        SearchManager searchManager = (SearchManager) HomeScreen.this.getSystemService(Context.SEARCH_SERVICE);
 
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-        }
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(HomeScreen.this.getComponentName()));
-        }
-        return super.onCreateOptionsMenu(menu);
+        SearchView search = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        search.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchResultsActivity.class)));
+
+        return true;
     }
 
     @Override
@@ -91,6 +91,7 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(new Intent(HomeScreen.this,InternationalNews.class));
                 break;
             }
+
         }
         return false;
     }

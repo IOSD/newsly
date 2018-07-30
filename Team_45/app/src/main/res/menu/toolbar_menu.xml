@@ -11,12 +11,17 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:iconTint="#000"
-        android:title="Search"/>
+        android:title="Search" />
 
     <item
         android:id="@+id/international_news"
-        android:title="@string/get_news"
+        android:title="International News"
         app:showAsAction="never" />
+    <item
+       android:id="@+id/national_news"
+        android:title="National News"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_sign_out"
         android:title="Sign Out"

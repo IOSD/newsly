@@ -2,5 +2,6 @@
     <string name="app_name">Newsly</string>
     <string name="facebook_app_id">1643825895739743</string>
     <string name="fb_login_protocol_scheme">fb1643825895739743</string>
+    <string name="get_news">International news</string>
 
 </resources>

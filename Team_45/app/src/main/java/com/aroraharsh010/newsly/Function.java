@@ -15,8 +15,6 @@ public class Function {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
-
-
     public static String excuteGet(String targetURL, String urlParameters)
     {
         URL url;

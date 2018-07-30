@@ -32,7 +32,6 @@ public class DetailsActivity extends AppCompatActivity {
         webView.getSettings().setDisplayZoomControls(false);
         webView.loadUrl(url);
 
-
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 if (progress == 100) {

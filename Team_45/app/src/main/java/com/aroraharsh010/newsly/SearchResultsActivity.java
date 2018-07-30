@@ -52,7 +52,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         listNews = (ListView) findViewById(R.id.listNews);
         loader = (ProgressBar) findViewById(R.id.loader);
         myFunction();
-        Toast.makeText(this,"Results for  "+query,Toast.LENGTH_LONG);//Not working
+        Toast.makeText(this,"Results for  "+query,Toast.LENGTH_LONG).show();//Not working
     }
 
     public void myFunction(){

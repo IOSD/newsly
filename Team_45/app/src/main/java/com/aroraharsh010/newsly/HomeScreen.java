@@ -56,8 +56,6 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        mMenu=myToolbar.getMenu();
-        mMenu.setGroupVisible(R.id.national_news,false);
         setSupportActionBar(myToolbar);
 
         mAuth=FirebaseAuth.getInstance();
